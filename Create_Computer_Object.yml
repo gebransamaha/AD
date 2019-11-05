@@ -1,0 +1,14 @@
+name: AD Computer Objects
+hosts: dc01
+gather_facts: no
+tasks:
+name: Add a powershell module
+win_psmodule:
+name: xActiveDirectory
+state: present
+name: Invoke DSC with Computer Objects
+win_dsc:
+resource_name: xADComputer
+ComputerName: “{{ vm_name }}”
+Path: CN=Computers,DC=example,dc=com
+ensure: “{{ ensure }}”
